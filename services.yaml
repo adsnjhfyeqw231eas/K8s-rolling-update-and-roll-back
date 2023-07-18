@@ -1,0 +1,25 @@
+# option 1:
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginxapp
+spec:
+  selector:
+    app: nginxapp
+  ports:
+  - protocol: TCP
+    port: 80
+    nodePort: 30000
+  type: NodePort
+
+
+# https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address/
+
+# Option 2:
+Or instead of writing services.yaml, just run one or both of the following:
+# kubectl expose deployment nginxapp --type=LoadBalancer --name=mydigilb
+# kubectl expose deployment nginxapp --type=NodePort --name=mynodesvc
+
+
+
+
