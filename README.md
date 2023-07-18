@@ -71,6 +71,16 @@ Just apply deployment.yaml again which has v2.
 #kubectl apply --filename=deployments.yaml --record=true
 and verify the same with # kiubectl get deployments -o wide and check in webbrowser also.
 
-
-
 # ************ THE END ************
+
+# Some troubleshootings guide:
+# Reset kubernegtes nodes?
+#kubeadm reset
+
+# Delete All Resources / If you want to perform a complete cleanup of your Kubernetes cluster, you can delete all your resources at once?
+#kubectl delete all --all --namespace default
+# Stop single deployment?
+#kubectl --namespace default scale deployment my-deployment --replicas 0
+# Stop multiple deployments?
+kubectl --namespace default scale deployment $(kubectl --namespace default get deployment | awk '{print $1}') --replicas 0 
+
