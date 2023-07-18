@@ -1,13 +1,3 @@
-# rolling update and rollback - k8s
-#https://github.com/javahometech/kubernetes/blob/master/deployments/deployments.yml
-
-# https://yourdevopsmentor.com/blog/how-to-stop-all-kubernetes-deployments/
-# delete all kubernetes deployments at once: # kubectl --namespace default scale deployment $(kubectl --namespace default get deployment | awk '{print $1}') --replicas 0
-# perform complete k8s cleanup: # kubectl delete all --all --namespace default
-
-
-
-# =========================================
 
 apiVersion: apps/v1
 kind: Deployment
