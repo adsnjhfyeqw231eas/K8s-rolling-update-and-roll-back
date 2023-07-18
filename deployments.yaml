@@ -1,0 +1,36 @@
+# rolling update and rollback - k8s
+#https://github.com/javahometech/kubernetes/blob/master/deployments/deployments.yml
+
+# https://yourdevopsmentor.com/blog/how-to-stop-all-kubernetes-deployments/
+# delete all kubernetes deployments at once: # kubectl --namespace default scale deployment $(kubectl --namespace default get deployment | awk '{print $1}') --replicas 0
+# perform complete k8s cleanup: # kubectl delete all --all --namespace default
+
+
+
+# =========================================
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginxapp
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      app: nginxapp
+  template:
+    metadata:
+      labels:
+        app: nginxapp
+    spec:
+      containers:
+      - name: nginxapp
+        image: tridevg/nginx-july:v1
+        ports:
+        - containerPort: 80
+
